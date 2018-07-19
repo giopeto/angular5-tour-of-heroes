@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 
 import { HeroService } from '../hero.service';
 import { Hero } from '../hero';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-hero-detail',
@@ -13,29 +14,42 @@ import { Hero } from '../hero';
 })
 export class HeroDetailComponent implements OnInit {
 
-  model: any = {name: '', alterEgo: '', power: ''};
+  id = + this.route.snapshot.paramMap.get('id');
+  heroForm: FormGroup;
   powers: Array<string> = ['Really Smart', 'Super Flexible', 'Super Hot', 'Weather Changer'];
 
-  constructor(
-    private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
     private heroService: HeroService,
-    private location: Location
-  ) { }
+    private location: Location,
+    private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    this.getHero();
+    if (this.id) {
+      this.getHero();
+    }
+
+    this.heroForm = this.formBuilder.group({
+      'name': [null, Validators.required],
+      'power': [null, Validators.required],
+      'alterEgo': ''
+    });
   }
 
   getHero(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.heroService.getHero(id)
-      .subscribe(hero => this.model = hero);
+    this.heroService.getHero(this.id)
+      .subscribe(hero => this.heroForm.patchValue(hero));
   }
 
-  save(): void {
-    const hero: Hero = this.model;
-    this.heroService.updateHero(hero)
-      .subscribe(() => this.goBack());
+  save(hero): void {
+    if (this.id) {
+      hero.id = this.id;
+      this.heroService.updateHero(hero as Hero)
+        .subscribe(() => this.goBack());
+    } else {
+      this.heroService.addHero(hero as Hero)
+        .subscribe(() => this.goBack());
+    }
+
   }
 
   goBack(): void {

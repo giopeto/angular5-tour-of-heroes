@@ -22,7 +22,11 @@ public class TourOfHeroesService {
 	}
 
 	public Heroes add(Heroes hero) {
-		Heroes newHero = new Heroes(heroes.get(heroes.size() - 1).getId() + 1, hero.getName(), hero.getPower(), hero.getAlterEgo());
+		int id = 1;
+		if (heroes.size() > 0) {
+			id = heroes.get(heroes.size() - 1).getId() + 1;
+		}
+		Heroes newHero = new Heroes(id, hero.getName(), hero.getPower(), hero.getAlterEgo());
 		heroes.add(newHero);
 		return newHero;
 	}
