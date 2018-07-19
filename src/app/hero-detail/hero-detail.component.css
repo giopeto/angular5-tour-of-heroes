@@ -6,7 +6,7 @@ label {
   color: #607D8B;
   font-weight: bold;
 }
-input {
+input, select {
   height: 2em;
   font-size: 1em;
   padding-left: .4em;
@@ -27,4 +27,12 @@ button:disabled {
   background-color: #eee;
   color: #ccc;
   cursor: auto;
+}
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
 }

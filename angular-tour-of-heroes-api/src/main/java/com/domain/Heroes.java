@@ -13,4 +13,6 @@ public class Heroes {
 
 	@Null private int id;
 	private String name;
+	private String power;
+	@Null private String alterEgo;
 }

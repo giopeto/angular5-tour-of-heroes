@@ -22,7 +22,7 @@ public class TourOfHeroesService {
 	}
 
 	public Heroes add(Heroes hero) {
-		Heroes newHero = new Heroes(heroes.get(heroes.size() - 1).getId() + 1, hero.getName());
+		Heroes newHero = new Heroes(heroes.get(heroes.size() - 1).getId() + 1, hero.getName(), hero.getPower(), hero.getAlterEgo());
 		heroes.add(newHero);
 		return newHero;
 	}
@@ -39,16 +39,16 @@ public class TourOfHeroesService {
 
 	private List<Heroes> getStaticHeroes() {
 		ArrayList<Heroes> list = new ArrayList<>();
-		list.add(new Heroes(11, "Mr. Nice" ));
-		list.add(new Heroes(12, "Narco" ));
-		list.add(new Heroes(13, "Bombasto" ));
-		list.add(new Heroes(14, "Celeritas" ));
-		list.add(new Heroes(15, "Magneta" ));
-		list.add(new Heroes(16, "RubberMan"));
-		list.add(new Heroes(17, "Dynama"));
-		list.add(new Heroes(18, "Dr IQ"));
-		list.add(new Heroes(19, "Magma"));
-		list.add(new Heroes(20, "Tornado"));
+		list.add(new Heroes(11, "Mr. Nice", "Really Smart", "a"));
+		list.add(new Heroes(12, "Narco", "Really Smart", "a"));
+		list.add(new Heroes(13, "Bombasto", "Really Smart", "a"));
+		list.add(new Heroes(14, "Celeritas", "Really Smart", "a"));
+		list.add(new Heroes(15, "Magneta", "Really Smart", "a"));
+		list.add(new Heroes(16, "RubberMan", "Really Smart", "a"));
+		list.add(new Heroes(17, "Dynama", "Really Smart", "a"));
+		list.add(new Heroes(18, "Dr IQ", "Really Smart", "a"));
+		list.add(new Heroes(19, "Magma", "Really Smart", "a"));
+		list.add(new Heroes(20, "Tornado", "Really Smart", "a"));
 
 		return list;
 	}

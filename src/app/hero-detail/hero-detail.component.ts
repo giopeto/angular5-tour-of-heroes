@@ -13,7 +13,8 @@ import { Hero } from '../hero';
 })
 export class HeroDetailComponent implements OnInit {
 
-  @Input() hero: Hero;
+  model: any = {name: '', alterEgo: '', power: ''};
+  powers: Array<string> = ['Really Smart', 'Super Flexible', 'Super Hot', 'Weather Changer'];
 
   constructor(
     private route: ActivatedRoute,
@@ -28,11 +29,12 @@ export class HeroDetailComponent implements OnInit {
   getHero(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.heroService.getHero(id)
-      .subscribe(hero => this.hero = hero);
+      .subscribe(hero => this.model = hero);
   }
 
   save(): void {
-    this.heroService.updateHero(this.hero)
+    const hero: Hero = this.model;
+    this.heroService.updateHero(hero)
       .subscribe(() => this.goBack());
   }
 
